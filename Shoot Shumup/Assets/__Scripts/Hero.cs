@@ -2,15 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour {
+public class Hero : MonoBehaviour
+{
+    static public Hero S;
 
+    [Header("Set Inspector")]
+
+    public float speed = 30;
+    public float rollMult = -45;
+    public float pitchMult;
+
+    [Header("Set Dynamically")]
+
+    public float shieldLevel = 1;
+
+    void Awake()
+    {
+        if (S==null)
+        {
+            S = this;
+        }
+        else
+        {
+            Debug.LogError("Hero.Awak() -  Attempted to assign second Hero.S!");
+        }
+    }
 	// Use this for initialization
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        float xAxis = Input.GetAxis("horizontal");
+        float yAxis = Input.GetAxis("Vertical");
+
+        Vector2 pos = transform.position;
+        pos.x +=xAxis + speed *Time.deltaTime;
+        pos.y += yAxis + speed * Time.deltaTime;
+        transform.position = pos;
+
+        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
+    }
 }
