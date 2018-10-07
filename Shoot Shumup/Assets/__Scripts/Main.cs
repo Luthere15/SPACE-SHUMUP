@@ -18,7 +18,7 @@ public class Main : MonoBehaviour
     {
         S = this;
         bndCheck = GetComponent<BoundsCheck>();
-        invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
+        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
     }
 
     public void SpawnEnemy()
@@ -28,17 +28,17 @@ public class Main : MonoBehaviour
         float enemypadding = enemyDefaultPadding;
         if(go.GetComponent<BoundsCheck>() != null)
         {
-            enemypadding=Mathf.Abs(go.GetComponent<BoundCheck>().radius);
+            enemypadding=Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
         }
 
         Vector3 pos = Vector3.zero;
         float xMin = -bndCheck.camWidth + enemypadding;
-        float xMAx = bndCheck.camWidth + enemypadding;
+        float xMAx = bndCheck.camWidth - enemypadding;
         pos.x = Random.Range(xMin, xMAx);
         pos.y = bndCheck.camHeight + enemypadding;
         go.transform.position = pos;
 
-        invoke("spawnEnemy", 1f / enemySpawnPerSecond);
+        Invoke("SpawnEnemy",1f / enemySpawnPerSecond);
     }
 	// Use this for initialization
 	void Start () {
