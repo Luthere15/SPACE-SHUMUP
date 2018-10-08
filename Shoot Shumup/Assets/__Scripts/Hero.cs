@@ -11,6 +11,9 @@ public class Hero : MonoBehaviour
     public float speed = 30;
     public float rollMult = -45;
     public float pitchMult = 30;
+    public float gameRestartDelay = 2f;
+    public GameObject projectilePrefab;
+    public float projectileSpeed = 40;
     
 
     [Header("Set Dynamically")]
@@ -46,6 +49,19 @@ public class Hero : MonoBehaviour
         transform.position = pos;
 
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TempFire();
+        }
+    }
+
+    void TempFire()
+    {
+        GameObject ProjGO = Instantiate<GameObject>(projectilePrefab);
+        ProjGO.transform.position = transform.position;
+        Rigidbody rigidB = ProjGO.GetComponent<Rigidbody>();
+        rigidB.velocity = Vector3.up * projectileSpeed;
     }
 
     void OntiggerEnter(Collider other)
