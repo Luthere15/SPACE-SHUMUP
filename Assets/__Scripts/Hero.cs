@@ -41,6 +41,9 @@ public class Hero : MonoBehaviour
         float yAxis = Input.GetAxis("Vertical");
 
         Vector3 pos = transform.position;
+
+        Debug.Log("Pos:" + pos + "\txAxis:" + xAxis + "\tyAxis: " + yAxis);
+
         pos.x +=xAxis * speed *Time.deltaTime;
         pos.y +=yAxis * speed *Time.deltaTime;
         transform.position = pos;
