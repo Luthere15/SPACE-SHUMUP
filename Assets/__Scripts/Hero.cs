@@ -64,7 +64,7 @@ public class Hero : MonoBehaviour
         rigidB.velocity = Vector3.up * projectileSpeed;
     }
 
-    void OntiggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
@@ -98,6 +98,7 @@ public class Hero : MonoBehaviour
             if(value< 0)
             {
                 Destroy(this.gameObject);
+                Main.S.DelayedRestart(gameRestartDelay);
             }
         }
     }
